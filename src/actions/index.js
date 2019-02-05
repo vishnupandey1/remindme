@@ -1,8 +1,7 @@
 import {
     ADD_REMINDER,
     DELETE_REMINDER,
-    CLEAR_ALL_REMINDERS,
-    HANDLE_LOGOUT
+    CLEAR_ALL_REMINDERS
 } from '../constant';
 
 export function addReminders(text, dueDate) {
@@ -23,13 +22,5 @@ export function deleteReminder(id) {
 export function clearAllReminders() {
     return {
         type: CLEAR_ALL_REMINDERS,
-    };
-}
-
-export function handleLogout(value) {
- console.log("AA le chak me aa gya")
-    return {
-        type: HANDLE_LOGOUT,
-        value
     };
 }

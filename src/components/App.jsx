@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Nav, NavItem } from "react-bootstrap";
 import moment from 'moment';
 import {
     addReminders,
     deleteReminder,
-    clearAllReminders,
-    handleLogout
+    clearAllReminders
 } from '../actions';
 
 class App extends Component {
     state = {
         text: '',
-        dueDate: '',
-        isLoggedIn:""
+        dueDate: ''
     }
 
     handleOnChangeDateTime = event => this.setState({
@@ -28,7 +25,6 @@ class App extends Component {
         const { text, dueDate } = this.state;
 
         this.props.addReminders(text, dueDate);
-        
     }
 
     deleteReminder = event => {
@@ -36,8 +32,6 @@ class App extends Component {
     }
 
     handleClearAllReminders = () => this.props.clearAllReminders();
-    
-    handleLogout = () => this.props.handleLogout(true);
 
     renderReminders = () => {
         const { reminders } = this.props;
@@ -58,7 +52,7 @@ class App extends Component {
                             onClick={this.deleteReminder}
                             id={reminder.id}
                         >
-                            <button >&#x274C;</button>
+                            &#x274C;
                         </div>
                     </li>
                 ))
@@ -68,17 +62,9 @@ class App extends Component {
     }
 
     render () {
-     //console.log(this)
         return (
             <div className="App">
-                <div className="App-title">
-                  Remind Me..!
-                </div>
-                <Nav bsStyle="pills" activeKey={1} onClick={this.handleLogout}>
-                <NavItem eventKey={1} href="#">
-                Logout
-                </NavItem>
-                </Nav>
+                <div className="App-title">Remind Me..!</div>
                 <div className="form-inline reminder-form">
                     <div className="form-group">
                         <input
@@ -113,11 +99,9 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
- console.log(state)
     return {
-        reminders: state.reminders,
-        isLoggedIn: state.isLoggedIn
+        reminders: state
     }
 }
 
-export default connect(mapStateToProps, { addReminders, deleteReminder, clearAllReminders, handleLogout })(App);
+export default connect(mapStateToProps, { addReminders, deleteReminder, clearAllReminders })(App);
